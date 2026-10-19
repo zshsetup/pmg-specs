@@ -1,0 +1,37 @@
+#:schema https://raw.githubusercontent.com/zshsetup/pmg/main/schema.json
+# a roaming remote shell; it bootstraps the server on the host through ssh, so ssh is a dependency
+# there is only a pre-release so far, which releases/latest of GitHub skips, so the newest release of
+# the list is the latest version
+
+min_glibc = "2.30"
+deps = ["openssh", "curl", "jq"]
+bin = { ssj = "ssj" }
+man = ["ssj.1"]
+completions.ssj.zsh = "completions/_ssj"
+completions.ssj.bash = "completions/ssj.bash"
+completions.ssj.fish = "completions/ssj.fish"
+
+test = "{{ cmd }} --version"
+
+[external]
+# none, as no package manager has it
+
+[release]
+type = "command"
+cmd = '''
+token="${PMG_GH_TOKEN:-${GH_TOKEN:-}}"
+curl -fsSL ${token:+-H "Authorization: Bearer $token"} \
+  "https://api.github.com/repos/audivir/ssj/releases?per_page=1" |
+  jq -r '.[0].tag_name'
+'''
+
+[download]
+type = "url"
+url = "https://github.com/audivir/ssj/releases/download/{{ tag }}/{{ asset }}"
+
+[assets]
+glibc_x64 = "ssj-{{ version }}-x86_64-unknown-linux-gnu.tar.gz"
+glibc_arm64 = "ssj-{{ version }}-aarch64-unknown-linux-gnu.tar.gz"
+musl_x64 = "ssj-{{ version }}-x86_64-unknown-linux-musl.tar.gz"
+musl_arm64 = "ssj-{{ version }}-aarch64-unknown-linux-musl.tar.gz"
+macos_arm64 = "ssj-{{ version }}-aarch64-apple-darwin.tar.gz"
