@@ -8,3 +8,8 @@ Changes to the specs that wait for something upstream.
   `delta-{{ tag }}-aarch64-unknown-linux-musl.tar.gz`, once the release shows its name), and
   remove the note on it in the first comment of the spec. Then, like `hyperfine`, the glibc
   entries could use the musl builds, if the min glibc of the gnu builds is a problem.
+- **ssj, stable release:** ssj has only a pre-release (`v0.1.0-rc1`), which `releases/latest` of
+  GitHub skips, so `specs/ssj.toml` takes the newest release from the list of the repo, with
+  `curl` and `jq`. When ssj has a stable release and the spec should only follow those, set
+  `[release]` to `type = "github"` and `repo = "audivir/ssj"`, drop `curl` and `jq` from `deps`,
+  and remove the note on it in the first comment of the spec.
