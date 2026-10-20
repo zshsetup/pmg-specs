@@ -1,7 +1,4 @@
 #:schema https://raw.githubusercontent.com/zshsetup/pmg/main/schema.json
-# a roaming remote shell; it bootstraps the server on the host through ssh, so ssh is a dependency
-# there is only a pre-release so far, which releases/latest of GitHub skips, so the newest release of
-# the list is the latest version
 
 min_glibc = "2.30"
 deps = ["openssh", "curl", "jq"]
@@ -17,17 +14,11 @@ test = "{{ cmd }} --version"
 # none, as no package manager has it
 
 [release]
-type = "command"
-cmd = '''
-token="${PMG_GH_TOKEN:-${GH_TOKEN:-}}"
-curl -fsSL ${token:+-H "Authorization: Bearer $token"} \
-  "https://api.github.com/repos/audivir/ssj/releases?per_page=1" |
-  jq -r '.[0].tag_name'
-'''
+type = "github"
+repo = "zshsetup/ssj"
 
 [download]
-type = "url"
-url = "https://github.com/audivir/ssj/releases/download/{{ tag }}/{{ asset }}"
+type = "github"
 
 [assets]
 glibc_x64 = "ssj-{{ version }}-x86_64-unknown-linux-gnu.tar.gz"
