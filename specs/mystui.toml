@@ -1,0 +1,24 @@
+#:schema https://raw.githubusercontent.com/zshsetup/pmg/main/schema.json
+
+min_glibc = "2.34"
+deps = ["docker", "docker-compose"]
+bin = { mystui = "{{ asset }}" }
+
+test = "{{ cmd }} --version"
+
+[external]
+# none, as no package manager has it
+
+[release]
+type = "github"
+repo = "audivir/mystui"
+
+[download]
+type = "github"
+
+[assets]
+glibc_x64 = "mystui-linux-amd64"
+glibc_arm64 = "mystui-linux-arm64"
+musl_x64 = "mystui-linux-musl-amd64"
+musl_arm64 = "mystui-linux-musl-arm64"
+macos_arm64 = "mystui-darwin-arm64"
