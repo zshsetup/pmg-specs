@@ -21,6 +21,6 @@ type = "github"
 [assets]
 glibc_x64 = "dirdiff-linux-amd64"
 glibc_arm64 = "dirdiff-linux-arm64"
-musl_x64 = "dirdiff-linux-amd64"
-musl_arm64 = "dirdiff-linux-arm64"
+musl_x64 = "dirdiff-linux-musl-amd64"
+musl_arm64 = "dirdiff-linux-musl-arm64"
 macos_arm64 = "dirdiff-darwin-arm64"
