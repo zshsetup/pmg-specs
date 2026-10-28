@@ -17,7 +17,7 @@ yum = "zstd"
 
 [release]
 type = "github"
-repo = "facebook/zstd"
+repo = "meta/zstd"
 
 [download]
 type = "github"
