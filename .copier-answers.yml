@@ -7,3 +7,4 @@ project_name: pmg-specs
 project_slug: pmg_specs
 project_type: shell
 publishable: false
+remove_tabs_extra_exclude: \.terminfo$
