@@ -1,0 +1,33 @@
+#:schema https://raw.githubusercontent.com/zshsetup/pmg/main/schema.json
+# gt is gitea/cli, the successor of tea; the release command uses curl, and the releases are
+# on gitea.com and not on GitHub
+
+deps = ["curl"]
+bin = { gt = "{{ asset }}" }
+post_install = 'mkdir -p "$PREFIX/man/man1" && "$PREFIX/bin/gt" man --output-file "$PREFIX/man/man1/gt.1"'
+completions.gt.zsh.cmd = "gt completion zsh"
+completions.gt.bash.cmd = "gt completion bash"
+completions.gt.fish.cmd = "gt completion fish"
+
+test = "{{ cmd }} --version"
+
+[external]
+brew = "gitea-cli"
+
+[release]
+type = "command"
+cmd = '''
+curl -fsSL https://gitea.com/api/v1/repos/gitea/cli/releases/latest |
+  grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4
+'''
+
+[download]
+type = "url"
+url = "https://gitea.com/gitea/cli/releases/download/{{ tag }}/{{ asset }}"
+
+[assets]
+glibc_x64 = "gitea-cli-{{ version }}-linux-amd64"
+glibc_arm64 = "gitea-cli-{{ version }}-linux-arm64"
+musl_x64 = "gitea-cli-{{ version }}-linux-amd64"
+musl_arm64 = "gitea-cli-{{ version }}-linux-arm64"
+macos_arm64 = "gitea-cli-{{ version }}-darwin-arm64"
