@@ -1,0 +1,25 @@
+#:schema https://raw.githubusercontent.com/zshsetup/pmg/main/schema.json
+# the static musl build also runs on glibc hosts, and curlp runs the curl of the dependency
+
+deps = ["curl"]
+bin = { curlp = "{{ asset }}" }
+# curl would print its own version for --version
+check = { args = ["--curlp-version"] }
+
+test = "{{ cmd }} --curlp-version"
+
+[external]
+
+[release]
+type = "github"
+repo = "audivir/curlp"
+
+[download]
+type = "github"
+
+[assets]
+glibc_x64 = "curlp-linux-musl-amd64"
+glibc_arm64 = "curlp-linux-musl-arm64"
+musl_x64 = "curlp-linux-musl-amd64"
+musl_arm64 = "curlp-linux-musl-arm64"
+macos_arm64 = "curlp-darwin-arm64"
