@@ -30,6 +30,6 @@ type = "url"
 url = "https://github.com/bitwarden/clients/releases/download/cli-{{ tag }}/{{ asset }}"
 
 [assets]
-glibc_x64 = "bw-linux-{{ version }}.zip"
-glibc_arm64 = "bw-linux-arm64-{{ version }}.zip"
-macos_arm64 = "bw-macos-arm64-{{ version }}.zip"
+glibc_x64 = "bw-bit-linux-{{ version }}.zip"
+glibc_arm64 = "bw-bit-linux-arm64-{{ version }}.zip"
+macos_arm64 = "bw-bit-macos-arm64-{{ version }}.zip"
